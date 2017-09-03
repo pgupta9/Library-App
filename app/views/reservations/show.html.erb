@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Current Reservations</h1>
+
+<table style="width:80%">
+  <thead>
+    <tr>
+      <th>Room#</th>
+      <th>Library name</th>
+      <th>User Name</th>
+      <th>Slot</th>
+      <th>Reservation date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.room.room_number %></td>
+        <td><%= reservation.room.library.name %></td>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.slot.start_time.strftime('%H:%M') %></td>
+        <td><%= reservation.reservation_date %></td>
+        <td><%= link_to 'Delete Reservation', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Back', afterlogin_path %>

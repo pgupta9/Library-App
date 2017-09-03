@@ -1,0 +1,31 @@
+<%= form_for(@room) do |f| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% @room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :library_id %><br>
+    <%= f.collection_select :library_id, @listlibraries, :id ,:name, {:selected => @listlibraries.find(&:id)} %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :room_number %><br>
+    <%= f.number_field :room_number %>
+  </div>
+   <div class="control-group">
+    <%= f.label :size, class: 'control-label' %><br>
+    <div class = "controls">
+    <%= f.select(:size, options_for_select([[4,4],[6,6],[12,12]]))%>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

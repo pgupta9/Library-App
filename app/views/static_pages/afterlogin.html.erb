@@ -1,0 +1,17 @@
+<h1>Library Reservation Service</h1>
+<div class="afterlogin">
+    <% if logged_admin? %>
+        <li><%= link_to "Create new Admins/Members", signup_path %></li>
+        <li><%= link_to "List All Admins",   listadmins_path %></li>
+        <li><%= link_to "List All Users",   listusers_path %></li>
+        <li><%= link_to "View/edit/add a room in library",   rooms_path %></li>
+        <li><%= link_to "View/edit/add new library",   libraries_path %></li>
+        <li><%= link_to "Search and Reserve a room for user ",   new_reservation_path %></li>
+        <li><%= link_to "Room booking history",   reservations_path %></li>
+        <li><%= link_to "View pending room bookings",   reservation_url(1) %></li>
+    <% else %>
+        <li><%= link_to "View my booking history",   reservations_path %></li>
+        <li><%= link_to "Search and Reserve a room",  new_reservation_path %></li>
+    <li><%= link_to "View my current reservations",  reservation_url(1) %></li>
+    <% end %>
+</div>

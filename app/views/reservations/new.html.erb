@@ -1,0 +1,39 @@
+<h1>New Reservation</h1>
+
+<%= form_for(@reservation) do |f| %>
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <div class="field">
+    <%= f.label :reservation_date %><br>
+    <%= f.date_field :reservation_date,min: Date.today, max: Date.today + 6, :order => [:month,:day, :year],:value => Date.today %>
+  </div>
+  <div class="field" >
+    <%= f.label "Room #" %><br>
+    <%= f.grouped_collection_select :room_id, Library.order(:name), :rooms, :name , :id ,:room_number, {:selected => @listrooms.find(&:id)}%>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.collection_select :user_id, @listuser, :id ,:email, {:selected => @listuser.find(&:id)} %>
+  </div>
+  <div class="field">
+    <%= f.label 'slot' %><br>
+    <%= f.collection_select :slot_id, @listslot, :id , :slot_time, {:selected => @listslot.find(&:id)} %>
+  </div>
+  Invite: <%= text_field_tag "emails" %> (please give emails in comma seperated eg: abc@gmail.com,xyz@gmail.com) <br><br>
+  <div class="actions">
+    <%= f.submit %>
+</div>
+<% end %>
+
+
+<%= link_to 'Back', afterlogin_path %>
